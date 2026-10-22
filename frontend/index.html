@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Pledges</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>🌱 Green Pledges</h1>
+      <p>Small commitments, measurable impact.</p>
+    </header>
+
+    <main class="layout">
+      <!-- headline numbers, filled by renderStats()-->
+        <section class="card stats" id="stats"></section>
+
+        <!-- create / edit form -->
+         <section class="card form-card">
+          <h2 id="form-title">Make a pledge</h2>
+          <form id="pledge-form" novalidate>
+            <input type="hidden" id="pledge-id" />
+
+            <label>
+              Pledge
+              <input id="pledge-text" placeholder="Enter your pledge" />
+            </label>
+
+            <label>
+              Owner
+              <input id="pledge-owner" placeholder="Enter your name" />
+            </label>
+            
+            <label>
+              Team
+              <input id="pledge-team" placeholder="Enter your team name" />
+            </label>
+
+            <label>
+              Target date
+              <input id="pledge-date" placeholder="Target date to complete" />
+            </label>
+
+            <label class="checkbox">
+              <input id="pledge-completed" type="checkbox" />
+              Completed
+            </label>
+
+            <p class="form-error" id="form-error" role="alert"></p>
+
+            <div class="actions">
+              <button type="submit" id="submit-btn">Add pledge</button>
+              <button type="button" id="cancel-btn" class="secondary" hidden>Cancel</button>
+            </div>
+          </form>
+         </section>
+
+         <!-- Leaderboards, drawn by chart.js -->
+          <section class="card">
+            <h2>Top pledgers</h2>
+            <canvas id="owner-leaderboard" aria-label="Completed pledges by owner"></canvas>
+          </section>
+
+          <section class="card">
+            <h2>Team leaderboard</h2>
+            <canvas id="team-leaderboard" aria-label="Completed pledges by team"></canvas>
+          </section>
+
+          <section class="card list-card">
+            <h2>All pledges</h2>
+            <p id="status"></p>
+            <ul id="pledge-list" class="pledge-list"></ul>
+          </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

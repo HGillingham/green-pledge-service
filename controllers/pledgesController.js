@@ -34,7 +34,7 @@ async function createPledge(req, res, next) {
             return;
         }
 
-        const { id, owner, pledge, completion_date } = value;
+        const { id, owner, pledge, completion_date, team, completed } = value;
 
         const params = {
             TableName: "Pledges",
@@ -43,6 +43,8 @@ async function createPledge(req, res, next) {
                 owner,
                 pledge,
                 completion_date,
+                team,
+                completed,
             },
         };
 
@@ -87,7 +89,7 @@ async function updatePledgeById(req, res, next) {
             return res.status(400).json({ error: error.details[0].message });
         }
 
-        const { owner, pledge, completion_date } = value;
+        const { owner, pledge, completion_date, team, completed } = value;
 
         const getParams = {
             TableName: "Pledges",
@@ -108,16 +110,20 @@ async function updatePledgeById(req, res, next) {
             TableName: "Pledges",
             Key: { id: pledgeId },
             UpdateExpression:
-                " set #owner = :owner, #pledge = :pledge, #completion_date = :completion_date",
+                " set #owner = :owner, #pledge = :pledge, #completion_date = :completion_date, #team = :team, #completed = :completed",
             ExpressionAttributeNames: {
                 "#owner": "owner",
                 "#pledge": "pledge",
                 '#completion_date': "completion_date",
+                '#team': 'team',
+                '#completed': 'completed',
             },
             ExpressionAttributeValues: {
                 ":owner": owner,
                 ":pledge": pledge,
                 ":completion_date": completion_date,
+                ":team": team,
+                ":completed": completed,
             },
             ReturnValues: "ALL_NEW",
         };
